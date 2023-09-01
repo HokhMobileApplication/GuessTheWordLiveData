@@ -40,7 +40,6 @@ class ScoreFragment : Fragment() {
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
-
     ): View? {
 
         // Inflate view and obtain an instance of the binding class.
@@ -58,10 +57,14 @@ class ScoreFragment : Fragment() {
 
         binding.scoreViewModel = viewModel
 
-        // Add observer for score
-        viewModel.score.observe(viewLifecycleOwner, Observer { newScore ->
-            binding.scoreText.text = newScore.toString()
-        })
+        // Specify the fragment view as the lifecycle owner of the binding.
+// This is used so that the binding can observe LiveData updates
+        binding.lifecycleOwner = viewLifecycleOwner
+
+//        // Add observer for score
+//        viewModel.score.observe(viewLifecycleOwner, Observer { newScore ->
+//            binding.scoreText.text = newScore.toString()
+//        })
 
 //        binding.playAgainButton.setOnClickListener { viewModel.onPlayAgain() }
 
